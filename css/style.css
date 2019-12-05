@@ -17,6 +17,7 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    height: 100vh;
 }
 
 /* ----- Navigation bar ----- */
@@ -62,6 +63,7 @@
     position: relative;
     background-color: rgba(27, 153, 193, 0.7);
     flex-basis: 70%;
+    height: 90vh;
 }
 
 .main_block__left_side::before {
@@ -134,7 +136,7 @@
 }
 
 .mb__ls_button:hover {
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.7);
+    box-shadow: 12px 14px 15px rgba(0, 0, 0, 0.7);
     transition: 0.4s ease-in;
 }
 
