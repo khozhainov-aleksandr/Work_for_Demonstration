@@ -23,7 +23,10 @@
 /* ----- Navigation bar ----- */
 
 .navigation {
-    background: rgba(27, 153, 193, 0.7);
+    position: absolute;
+    width: 100vw;
+    z-index: 1;
+    background: rgba(27, 153, 193, 0);
 }
 
 .nav_list {
@@ -62,12 +65,12 @@
 .main_block__left_side {
     position: relative;
     background-color: rgba(27, 153, 193, 0.7);
-    flex-basis: 70%;
-    height: 88vh;
+    flex-basis: 75%;
+    height: 99vh;
 }
 
-.main_block__left_side::before {
-    content: " ";
+.main_block__left_side:before {
+    content: '';
     position: absolute;
     top: 0px;
     left: -500%;
@@ -79,13 +82,13 @@
 .mb__ls_ultrasound_wrapper {
     display: flex;
     flex-direction: row;
-    padding: 120px 40px 40px 0;
+    padding: 200px 40px 40px 0;
 }
 
 .mb__ls_ultrasound > h1 {
     font-family: "Montserrat", sans-serif;
     font-weight: 900;
-    font-size: 8.75rem;
+    font-size: 8.6rem;
     line-height: 110px;
     color: #ffffff;
     padding: 0 20px 0 0;
@@ -94,7 +97,7 @@
 .mb__ls_ultrasound_text > p {
     font-family: "Montserrat", sans-serif;
     font-weight: 700;
-    font-size: 2.125rem;
+    font-size: 2rem;
     line-height: 41px;
     color: #ffffff;
     padding: 0 0 28px 0;
@@ -158,11 +161,12 @@
 .main_block__right_side {
     position: relative;
     background-color: rgba(255, 255, 255, 0.8);
-    flex-basis: 30%;
+    flex-basis: 25%;
+    height: 99vh;
 }
 
-.main_block__right_side::before {
-    content: " ";
+.main_block__right_side:after {
+    content: '';
     position: absolute;
     top: 0px;
     right: -500%;
@@ -174,7 +178,7 @@
 .mb__rs_content_wrapper {
     display: flex;
     flex-direction: column;
-    padding-top: 120px;
+    padding-top: 188px;
 }
 
 .mb__rs_content {
@@ -190,7 +194,7 @@
 .mb__rs_content_text {
     font-family: "Montserrat", sans-serif;
     font-weight: 300;
-    font-size: 1.25rem;
+    font-size: 1rem;
     line-height: 151.4%;
     color: #1B99C1;
     padding: 0 0 0 36px;
@@ -271,10 +275,33 @@
 }
 
 .sb_rs__map_wrapper {
+    position: relative;
     width: 650px;
     height: 372px;
     margin: 50px 0 0 20px;
-    border: 15px solid rgba(27, 153, 193, 0.7);
+    /* border: 15px solid rgba(27, 153, 193, 0.7); */
+}
+
+.sb_rs__map_wrapper:before {
+    content: '';
+    position: absolute;
+    top: 141px;
+    left: -20px;
+    width: 90px;
+    height: 250px;
+    z-index: -1;
+    background-color: rgba(27, 153, 193, 0.7);
+}
+
+.sb_rs__map_wrapper:after {
+    content: '';
+    position: absolute;
+    top: -19px;
+    right: -20px;
+    width: 90px;
+    height: 250px;
+    z-index: -1;
+    background-color: rgba(27, 153, 193, 0.7);
 }
 
 .sb_rs__map_wrapper>iframe {
