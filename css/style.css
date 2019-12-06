@@ -127,7 +127,7 @@
 }
 
 .mb__ls_button {
-    padding: 10px 15px;
+    padding: 15px 40px;
     font-family: "Montserrat", sans-serif;
     font-weight: 400;
     font-size: 1rem;
@@ -139,7 +139,8 @@
 }
 
 .mb__ls_button:hover {
-    box-shadow: 12px 14px 15px rgba(0, 0, 0, 0.7);
+    color: #1B99C1;
+    background-color: #ffffff;
     transition: 0.4s ease-in;
 }
 
@@ -391,4 +392,12 @@
     font-size: 22px;
     line-height: 2.5;
     color: #ffffff;
+}
+
+.buttons_wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 550px;
+    padding: 40px 0 0 55px;
 }
