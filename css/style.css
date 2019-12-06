@@ -401,3 +401,123 @@
     width: 550px;
     padding: 40px 0 0 55px;
 }
+
+/* ----- Fourth Block -----*/
+
+.fourth_block_h3_text {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 34px;
+    line-height: 41px;
+    text-align: center;
+    color: rgba(27, 153, 193, 0.7);
+    padding: 80px 0 50px 0;
+}
+
+.fourth_block__wrapper {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.fourth_block__block_content_box {
+    width: 30%;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    box-shadow: 0 0 10px #000000;
+}
+
+.fourth_block__block_content_box_img {
+    height: 208px;
+}
+
+.fourth_block__block_content_box_h6 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 207.19%;
+    text-align: center;
+    text-transform: uppercase;
+    color: #1B99C1;
+    padding: 10px 0;
+}
+
+.fourth_block__block_content_box_p {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 173.19%;
+    text-align: center;
+    color: #010036;
+}
+
+/* ----- Fifth Block ----- */
+
+.fifth_block__wrapper {
+    display: flex;
+    flex-direction: row;
+    padding: 50px 0;
+}
+
+/* Left */
+.fifth_block__left_block {
+    width: 30%;
+}
+
+.fifth_block__left_block_img {
+    width: 100%;
+}
+
+/* Centre */
+.fifth_block__centre_block {
+    width: 40%;
+    padding-top: 30px;
+}
+
+.fifth_block__centre_block_h6{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+    font-size: 34px;
+    line-height: 60px;
+    color: #010036;
+}
+
+.fifth_block__centre_block_h4 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 60px;
+    color: #010036;
+}
+
+.fifth_block__centre_block_ul {
+    padding: 35px 0 0 60px;
+}
+
+.fifth_block__centre_block_ul>li {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 53px;
+    color: #010036;
+}
+
+
+
+/* Right */
+.fifth_block__right_block {
+    width: 30%;
+    margin: auto 0;
+}
+
+.fifth_block__right_block_h6 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 34px;
+    line-height: 51px;
+    text-align: right;
+    color: #1B99C1;
+}
