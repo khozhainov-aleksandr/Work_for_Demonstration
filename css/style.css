@@ -505,8 +505,6 @@
     color: #010036;
 }
 
-
-
 /* Right */
 .fifth_block__right_block {
     width: 30%;
@@ -520,4 +518,68 @@
     line-height: 51px;
     text-align: right;
     color: #1B99C1;
+}
+
+/* ------ Sixth Block ------ */
+
+.sixth_block {
+    background-image: url("../img/sixth_block__doctor/background.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+.sixth_block__wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+
+
+/*  */
+.sixth_block__left_side {
+    position: relative;
+    background-color: rgba(27, 153, 193, 0.7);
+    flex-basis: 70%;
+    height: 99vh;
+}
+
+.sixth_block__left_side:before {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: -500%;
+    width: 500%;
+    height: 100%;
+    background-color: rgba(27, 153, 193, 0.7);
+}
+
+
+
+
+
+
+
+
+
+
+/*  */
+.sixth_block__right_side {
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.8);
+    flex-basis: 30%;
+    height: 99vh;
+}
+
+.sixth_block__right_side:after {
+    content: '';
+    position: absolute;
+    top: 0px;
+    right: -500%;
+    width: 500%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
 }
