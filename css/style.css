@@ -73,8 +73,8 @@
     content: '';
     position: absolute;
     top: 0px;
-    left: -500%;
-    width: 500%;
+    left: -100vw;
+    width: 100vw;
     height: 100%;
     background-color: rgba(27, 153, 193, 0.7);
 }
@@ -170,8 +170,8 @@
     content: '';
     position: absolute;
     top: 0px;
-    right: -500%;
-    width: 500%;
+    right: -100vw;
+    width: 100vw;
     height: 100%;
     background-color: rgba(255, 255, 255, 0.8);
 }
@@ -339,8 +339,8 @@
     content: '';
     position: absolute;
     top: 0px;
-    left: -500%;
-    width: 500%;
+    left: -100vw;
+    width: 100vw;
     height: 100%;
     background-color: rgba(255, 255, 255, 0.8);
 }
@@ -372,10 +372,11 @@
     content: '';
     position: absolute;
     top: 0px;
-    right: -500%;
-    width: 500%;
+    right: -100vw;
+    width: 100vw;
     height: 100%;
     background-color: rgba(3, 128, 168, 0.8);
+    overflow: hidden;
 }
 
 .tb__list_of_services_wrapper {
@@ -563,8 +564,8 @@
     content: '';
     position: absolute;
     top: 0px;
-    left: -500%;
-    width: 500%;
+    left: -100vw;
+    width: 100vw;
     height: 100%;
     background-color: rgba(27, 153, 193, 0.7);
 }
@@ -594,8 +595,8 @@
     content: '';
     position: absolute;
     top: 0px;
-    right: -500%;
-    width: 500%;
+    right: -100vw;
+    width: 100vw;
     height: 100%;
     background-color: rgba(255, 255, 255, 0.8);
 }
@@ -616,7 +617,7 @@
 
 /*------ Footer  ------*/
 
-.footer_slick-slider_block_img {
+/* .footer_slick-slider_block_img {
     width: 200px;
     height: 350px;
-}
+} */
