@@ -624,6 +624,21 @@
     margin: 0 auto;
     overflow: hidden;
     position: relative;
+    padding: 20px 0;
+}
+
+.carousel-container_h3 {
+    font-family: "Montserrat", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 34px;
+    line-height: 41px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #1B99C1;
+    padding: 30px 0px;
+    position: relative;
+    left: -20px;
 }
 
 .carousel-slides {
@@ -665,11 +680,12 @@
 
 .btn-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     height: 30px;
-    width: 100%;
+    width: 115%;
     position: absolute;
-    top: 180px;
+    top: 260px;
+    left: -94px;
 }
 
 .btn {
@@ -678,6 +694,14 @@
     background-image: url('../img/seventh_block_certificates/left_arrow.png');
     background-position: 0 0;
     background-size: cover;
+    border: 1px solid #1B99C1;
+    transition: 0.4s ease-in;
+}
+
+.btn:hover {
+    background-image: url('../img/seventh_block_certificates/left_arrow_hover.png');
+    background-color: #1B99C1;
+    transition: 0.4s ease-in;
 }
 
 .btn:nth-child(2) {
