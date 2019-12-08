@@ -1,8 +1,8 @@
 // ---------------- Fixing the Top Header -------------------
 
 window.onscroll = function showHeader() {
-    var header = document.querySelector('#header');
-    if (window.pageYOffset > 0) {
+    var header = document.querySelector('.navigation');
+    if (window.pageYOffset > 900) {
         header.classList.add('header_fixed');
     } else {
         header.classList.remove('header_fixed');

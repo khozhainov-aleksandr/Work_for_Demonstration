@@ -29,6 +29,15 @@
     background: rgba(27, 153, 193, 0);
 }
 
+/*  */
+.header_fixed {
+    position: fixed;
+    width: 100vw;
+    background: rgba(27, 153, 193, 1);
+    z-index: 5;
+}
+/*  */
+
 .nav_list {
     display: flex;
     justify-content: center;
