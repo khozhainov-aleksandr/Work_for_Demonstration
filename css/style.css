@@ -617,7 +617,69 @@
 
 /*------ Footer  ------*/
 
-/* .footer_slick-slider_block_img {
-    width: 200px;
-    height: 350px;
-} */
+.carousel-container {
+    display: block;
+    width: 800px;
+    height: 600px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel-slides {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    left: 30%;
+    top: 0;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+}
+
+.slide:nth-child(1) {
+    left: 0;
+}
+
+.slide:nth-child(2) {
+    left: 100%;
+}
+
+.slide:nth-child(3) {
+    left: 200%;
+}
+
+.slide:nth-child(4) {
+    left: 300%;
+}
+
+.slide:nth-child(5) {
+    left: 400%;
+}
+
+.slide:nth-child(6) {
+    left: 500%;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+    height: 30px;
+    width: 100%;
+    position: absolute;
+    top: 75px;
+}
+
+.btn {
+    width: 60px;
+    height: 60px;
+    background-image: url('../img/seventh_block_certificates/left_arrow.png');
+    background-position: 0 0;
+    background-size: cover;
+}
+
+.btn:nth-child(2) {
+    transform: rotate(180deg);
+}
