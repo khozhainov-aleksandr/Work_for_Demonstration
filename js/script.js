@@ -2,7 +2,7 @@
 
 window.onscroll = function showHeader() {
     var header = document.querySelector('.navigation');
-    if (window.pageYOffset > 900) {
+    if (window.pageYOffset > 70) {
         header.classList.add('header_fixed');
     } else {
         header.classList.remove('header_fixed');
@@ -10,7 +10,6 @@ window.onscroll = function showHeader() {
 };
 
 // End
-
 
 // -------------------  Slider -------------------------
 
