@@ -927,7 +927,7 @@ margin: -28px 0 0 0;
     .mb__rs_content {
         display: flex;
         flex-direction: row;
-        padding: 30px 0 30px 25px;
+        padding: 25px 0 16px 25px;
     }
 
     .mb__rs_content_img {
@@ -936,6 +936,8 @@ margin: -28px 0 0 0;
 
     .mb_rs_img_hover {
         width: 60px;
+        /* display: initial; */
+        display: block;
     }
 
     .mb__rs_content_text {
