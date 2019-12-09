@@ -11,10 +11,34 @@
 /*----- Background ----- */
 
 .main_header {
+    position: relative;
     background-image: url("../img/first_block__header/background.jpg");
     background-position: center;
-    background-size: auto 103%;
+    background-size: 100% 103%;
     background-repeat: no-repeat;
+    z-index: 1;
+}
+
+.main_header:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 30%;
+    width: 70%;
+    height: 100%;
+    background-color: rgba(3, 128, 168, 0.8);
+    z-index: 2;
+}
+
+.main_header:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 70%;
+    width: 30%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 2;
 }
 
 /* ----- Navigation bar ----- */
@@ -22,7 +46,7 @@
 .navigation {
     position: fixed;
     width: 100vw;
-    z-index: 1;
+    z-index: 4;
     background: rgba(27, 153, 193, 0);
 }
 
@@ -31,7 +55,7 @@
     position: fixed;
     width: 100vw;
     background: rgba(27, 153, 193, 1);
-    z-index: 5;
+    z-index: 10;
 }
 /*  */
 
@@ -56,9 +80,14 @@
 
 /* ----- Main Block ----- */
 
+.main_block {
+}
+
 .main_block__wrapper {
     display: flex;
     flex-direction: row;
+    position: relative;
+    z-index: 3;
 }
 
 /*------ Main Block - Left Side ------*/
@@ -69,20 +98,7 @@
 }
 
 .main_block__left_side {
-    position: relative;
-    background-color: rgba(27, 153, 193, 0.7);
-    flex-basis: 75%;
-    max-height: 100vh;
-}
-
-.main_block__left_side:before {
-    content: "";
-    position: absolute;
-    top: 0px;
-    left: -100vw;
-    width: 100vw;
-    height: 100%;
-    background-color: rgba(27, 153, 193, 0.7);
+    width: 75%;
 }
 
 .mb__ls_ultrasound_wrapper {
@@ -143,7 +159,6 @@
     text-decoration: none;
     border: 1px solid #ffffff;
     transition: 0.4s ease-in;
-    justify-content: center;
 }
 
 .mb__ls_button:hover {
@@ -168,20 +183,7 @@
 /*------  Main Block - Right Side ------*/
 
 .main_block__right_side {
-    position: relative;
-    background-color: rgba(255, 255, 255, 0.8);
-    flex-basis: 25%;
-    max-height: 100vh;
-}
-
-.main_block__right_side:after {
-    content: "";
-    position: absolute;
-    top: 0px;
-    right: -100vw;
-    width: 100vw;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.8);
+    width: 25%;
 }
 
 .mb__rs_content_wrapper {
@@ -293,7 +295,6 @@
     width: 650px;
     height: 372px;
     margin: 50px 0 0 20px;
-    /* border: 15px solid rgba(27, 153, 193, 0.7); */
 }
 
 .sb_rs__map_wrapper:before {
@@ -326,35 +327,51 @@
 /* ----- Third Block ----- */
 
 .third_block {
+    position: relative;
     background-image: url("../img/first_block__header/background.jpg");
     background-position: center;
-    background-size: cover;
+    background-size: 100% 103%;
     background-repeat: no-repeat;
-    height: 100vh;
+    z-index: 1;
 }
+
+/*  */
+
+.third_block:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 70%;
+    width: 30%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 2;
+}
+
+.third_block:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 30%;
+    min-width: 70%;
+    height: 100%;
+    background-color: rgba(3, 128, 168, 0.8);
+    z-index: 2;
+}
+
+/*  */
 
 .third_block__wrapper {
     display: flex;
     flex-direction: row;
+    position: relative;
+    z-index: 3;
 }
 
 /* Left Block */
 
 .third_block__left_block {
-    position: relative;
-    flex-basis: 30%;
-    background-color: rgba(255, 255, 255, 0.8);
-    height: 99vh;
-}
-
-.third_block__left_block:before {
-    content: "";
-    position: absolute;
-    top: 0px;
-    left: -100vw;
-    width: 100vw;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.8);
+    width: 30%;
 }
 
 .third_block__left_block {
@@ -374,21 +391,7 @@
 /* Right Block */
 
 .third_block__right_block {
-    position: relative;
-    flex-basis: 70%;
-    background-color: rgba(3, 128, 168, 0.8);
-    height: 99vh;
-}
-
-.third_block__right_block:after {
-    content: "";
-    position: absolute;
-    top: 0px;
-    right: -100vw;
-    width: 100vw;
-    height: 100%;
-    background-color: rgba(3, 128, 168, 0.8);
-    overflow: hidden;
+    width: 70%;
 }
 
 .tb__list_of_services_wrapper {
@@ -396,7 +399,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 150px 0 0 50px;
+    padding: 85px 0 0 50px;
 }
 
 .tb__list_of_services > ul > li {
@@ -536,11 +539,34 @@
 /* ------ Sixth Block ------ */
 
 .sixth_block {
+    position: relative;
     background-image: url("../img/sixth_block__doctor/background.jpg");
     background-position: center;
-    background-size: cover;
+    background-size: 100% 103%;
     background-repeat: no-repeat;
-    height: 100vh;
+    z-index: 1;
+}
+
+.sixth_block:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 30%;
+    width: 70%;
+    height: 100%;
+    background-color: rgba(3, 128, 168, 0.8);
+    z-index: 2;
+}
+
+.sixth_block:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 70%;
+    width: 30%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 2;
 }
 
 .sixth_block__wrapper {
@@ -553,7 +579,7 @@
     position: absolute;
     top: 350px;
     left: 740px;
-    z-index: 1;
+    z-index: 5;
     width: 530px;
 }
 
@@ -564,26 +590,13 @@
 
 /* Left side */
 .sixth_block__left_side {
-    display: flex;
-    align-items: center;
     position: relative;
-    background-color: rgba(27, 153, 193, 0.7);
-    flex-basis: 70%;
-    height: 100vh;
-}
-
-.sixth_block__left_side:before {
-    content: "";
-    position: absolute;
-    top: 0px;
-    left: -100vw;
-    width: 100vw;
-    height: 100%;
-    background-color: rgba(27, 153, 193, 0.7);
+    width: 70%;
+    z-index: 3;
 }
 
 .sixth_block__left_side_ul_block {
-    margin: 0 180px 0 0;
+    margin: 70px 180px 80px 0;
 }
 
 .sixth_block__left_side_ul_block > li {
@@ -598,19 +611,8 @@
 /* Right side  */
 .sixth_block__right_side {
     position: relative;
-    background-color: rgba(255, 255, 255, 0.8);
-    flex-basis: 30%;
-    height: 100vh;
-}
-
-.sixth_block__right_side:after {
-    content: "";
-    position: absolute;
-    top: 0px;
-    right: -100vw;
-    width: 100vw;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.8);
+    width: 30%;
+    z-index: 3;
 }
 
 .sixth_block__right_side_wrapper {
