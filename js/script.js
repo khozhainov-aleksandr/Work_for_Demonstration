@@ -22,6 +22,12 @@ const modalLink = document.querySelector('.modal__link');
 const searchForm = document.querySelector('.search__form');
 const searchFormInput = document.querySelector('.search__form-input');
 
+const preloader = document.querySelector('.preloader'); 
+const dropdown = document.querySelectorAll('.dropdown');
+const tvShowsHead = document.querySelector('.tv-shows__head');
+const posterWrapper = document.querySelector('.poster__wrapper');
+const modalContent = document.querySelector('.modal__content');
+
 
 // ! Прилоудер на всю страницу ---
 const loading = document.createElement('div'); // Создали элемент
@@ -52,16 +58,33 @@ class DBService {
 	}
 
 	getTvShow = id => this.getData(`${SERVER}/tv/${id}?api_key=${API_KEY}&language=ru-RU`); // Другой стиль написания
-};
-// Конец
 
+	getTopRated = () => this.getData(`${this.SERVER}/tv/top_rated?api_key=${API_KEY}&language=ru-RU`);
+
+	getPopular = () => this.getData(`${this.SERVER}/tv/popular?api_key=${API_KEY}&language=ru-RU`);
+
+	getToday = () => this.getData(`${this.SERVER}/tv/airing_today?api_key=${API_KEY}&language=ru-RU`);
+
+	getWeek = () => this.getData(`${this.SERVER}/tv/on_the_air?api_key=${API_KEY}&language=ru-RU`);
+}
+
+const dbService = new DBService();
 
 // ! Рендерятся картинки с сервера ---
 const renderCard = response => {
 	tvShowsList.textContent = '';
 
-	response.results.forEach(item => {
+	if (!response.total_results) {
+		loading.remove();
+		tvShowsHead.textContent = 'К сожалению по вашему запросу не чего не найдено ...';
+		tvShowsHead.style.cssText = 'color: red; font-size: 30px;';
+		return;
+	}
 
+	tvShowsHead.textContent = 'Результат поиска';
+	tvShowsHead.style.cssText = 'color: black;';
+
+	response.results.forEach(item => {
 		const {
 			backdrop_path: backdrop,
 			name: title,
@@ -92,7 +115,6 @@ const renderCard = response => {
 		tvShowsList.append(card); // Загружаются новые карточки с сервера
 	});
 };
-// Конец
 
 
 // ! Работа с поисковой строкой
@@ -104,16 +126,21 @@ searchForm.addEventListener('submit', event => { // Submit это событие
 		tvShows.append(loading);
 		new DBService().getSearchResult(value).then(renderCard);
 	}
-})
-// Конец
+	searchFormInput.value = '';
+});
 
+
+const closeDropdown = () => {
+	dropdown.forEach(item => {
+		item.classList.remove('active') // закрываем все выпадающие меню при нажатии на пустое пространство за пределами окна
+	})
+}
 
 // ! Открытие меню по нажатию на Гамбургер ---
 hamburger.addEventListener('click', () => { // addEventListener - (вызов функции) отслеживает события: клик, наведение, нажатия клавиши
 	leftMenu.classList.toggle('openMenu'); // classList - обращаемся к методу он работает только с классами и точку ставить не нужно в скобках
 	hamburger.classList.toggle('open'); // toggle - добавляет если есть класс и убирает если его нету // эта строчка меняет значок гамбургера на красный крестик
 });
-// Конец
 
 
 // ! Закрытия меню когда мы щелкаем за ее пределами ---
@@ -122,9 +149,9 @@ document.addEventListener('click', event => {
 	if (!target.closest('.left-menu')) { // стоит ! знак отрицания что бы поменять true на false. А когда стоит !! это двойное отрицание что бы посмотреть буливое значение элемента
 		leftMenu.classList.remove('openMenu'); // Метод remove позволяет закрыть окно (убрать классы openMenu и open)
 		hamburger.classList.remove('open');
+		closeDropdown();
 	}
 });
-// Конец
 
 
 // ! Drop Down Menu делает выпадающие списки по нажатию в левом окне - меню (раскрывает список ul "dropdown-list") ---
@@ -137,8 +164,23 @@ leftMenu.addEventListener('click', event => { // event без скобок () т
 		leftMenu.classList.add('openMenu'); // 29 и 30 строчки добавляется классы для того что бы меню открывалось по нажатию на иконки (не обязательно нажимать на гамбургер что бы открыть меню)
 		hamburger.classList.add('open');
 	}
+
+	if (target.closest('#top-rander')) {
+		dbService.getTopRated().then(renderCard);
+	}
+
+	if (target.closest('#popular')) {
+		dbService.getTopRated().then(renderCard);
+	}
+
+	if (target.closest('#week')) {
+		dbService.getTopRated().then(renderCard);
+	}
+
+	if (target.closest('#today')) {
+		dbService.getTopRated().then(renderCard);
+	}
 });
-// Конец
 
 
 // ! Открытие модального окна ---
@@ -151,28 +193,45 @@ tvShowsList.addEventListener('click', event => {
 
 	if (card) {
 
+		preloader.style.display = 'block';
+
 		// ! Подставляются данные в карточку ---
 		new DBService().getTvShow(card.id)
-		.then(data => { // then метод который обрабатывает промисы
-			tvCardImg.src = IMG_URL + data.poster_path; // Подставляем картинки
-			tvCardImg.alt = data.name;
-			modalTitle.textContent = data.name; // Подставляем заголовки
-			genresList.textContent = '';
-			for (const item of data.genres) { // fore быстрее чем foreEach лучше использовать fore
-				genresList.innerHTML += `<li>${item.name}</li>`;
-			};
-			rating.textContent = data.vote_average;
-			description.textContent = data.overview;
-			modalLink.href = data.homepage;
-		})
+		.then(({ // then метод который обрабатывает промисы
+			poster_path: posterPath,
+			name: title,
+			genres,
+			vote_average: voteAverage,
+			overview,
+			homepage }) => {
+				if (posterPath) {
+					tvCardImg.src = IMG_URL + posterPath; // Подставляем картинки
+					tvCardImg.alt = title;
+					posterWrapper.style.display = '';
+					modalContent.style.paddingLeft = '';
+				} else {
+					posterWrapper.style.display = 'none';
+					modalContent.style.paddingLeft = '25px';
+				}
+				
+				modalTitle.textContent = title; // Подставляем заголовки
+				genresList.textContent = '';
+				genres.forEach(item => {
+					genresList.innerHTML += `<li>${item.name}</li>`;
+				});
+				rating.textContent = voteAverage;
+				description.textContent = overview;
+				modalLink.href = homepage;
+			})
 		.then(() => {
 			document.body.style.overflow = 'hidden'; // вызываем overflow: hiden; что бы скрыть скрол с права
 			modal.classList.remove('hide');
 		})
-		
-	}
+		.finally(() => {
+			preloader.style.display = ''; // Закрытие прилоудера для модального окна
+		})
+	};
 });
-// Конец
 
 
 // ! Закрытие модального окна ---
@@ -185,7 +244,6 @@ modal.addEventListener('click', event => {
 		modal.classList.add('hide'); // Прячет модальное окно
 	}
 });
-// Конец
 
 
 // ! Смена карточек (замена местами) ---
@@ -202,4 +260,3 @@ const changeImage = event => {
 
 tvShowsList.addEventListener('mouseover', changeImage);
 tvShowsList.addEventListener('mouseout', changeImage);
-// Конец

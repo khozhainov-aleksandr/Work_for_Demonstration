@@ -454,6 +454,10 @@ main {
     border-top: 2px solid #ccc;
 }
 
+.search__form-button-wrapper {
+	display: none;
+}
+
 .tv-shows__head {
     margin: 15px 0;
 }
@@ -690,6 +694,27 @@ main {
 	.cross {
 		top: 0;
 		right: 0;
+	}
+
+	.search__form-button-wrapper {
+		display: block;
+		text-align: center;
+	}
+
+	.search__form-button {
+		margin-top: 15px;
+		padding: 8px 20px 5px 20px;
+		border: 1px solid rgba(0, 0, 0, 0.3);
+		border-radius: 10px;
+		font-size: 16px;
+		background-color: rgba(0, 0, 0, 0.1);
+		cursor: pointer;
+	}
+
+	.search__form-button-img {
+		padding-left: 5px;
+		height: 15px;
+		width: 15px;
 	}
 }
 
