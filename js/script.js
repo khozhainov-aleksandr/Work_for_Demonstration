@@ -1,4 +1,4 @@
-// Комментарии написаны на Русском в учебных целях для личного использования !
+// + Комментарии написаны на Русском в учебных целях для личного использования !
 
 const IMG_URL = 'https://image.tmdb.org/t/p/w185_and_h278_bestv2/';
 const SERVER = 'https://api.themoviedb.org/3';
@@ -8,8 +8,9 @@ const leftMenu = document.querySelector('.left-menu');
 const hamburger = document.querySelector('.hamburger');
 const tvShowsList = document.querySelector('.tv-shows__list');
 const modal = document.querySelector('.modal');
-const tvShows = document.querySelector('.tv-shows');
+const tvShows = document.querySelector('.tv-shows'); // Используется для прилоудера
 
+// ! Эта секция используется для заполнения pop-up окна при нажатии на карточку
 const tvCardImg = document.querySelector('.tv-card__img');
 const modalTitle = document.querySelector('.modal__title');
 const genresList = document.querySelector('.genres-list');
@@ -17,15 +18,17 @@ const rating = document.querySelector('.rating');
 const description = document.querySelector('.description');
 const modalLink = document.querySelector('.modal__link');
 
+// ! Срабатывает поиск по нажатию на Enter
 const searchForm = document.querySelector('.search__form');
 const searchFormInput = document.querySelector('.search__form-input');
 
 
-// Прилоудер на странице
-const loading = document.createElement('div');
-loading.className = 'loading';
+// ! Прилоудер на всю страницу ---
+const loading = document.createElement('div'); // Создали элемент
+loading.className = 'loading'; // Добавили класс для прилоудера
 
-// Запрос на сервер
+
+// ! Делаем запрос на сервер ---
 class DBService {
 	getData = async (url) => {
 		const res = await fetch(url);
@@ -49,9 +52,11 @@ class DBService {
 	}
 
 	getTvShow = id => this.getData(`${SERVER}/tv/${id}?api_key=${API_KEY}&language=ru-RU`); // Другой стиль написания
-}
+};
+// Конец
 
 
+// ! Рендерятся картинки с сервера ---
 const renderCard = response => {
 	tvShowsList.textContent = '';
 
@@ -66,8 +71,8 @@ const renderCard = response => {
 		} = item;
 
 		const posterIMG = poster ? IMG_URL + poster : 'img/no-poster.jpg';
-		const backdropIMG = backdrop ? IMG_URL + backdrop : '';
-		const voteElem = vote ? `<span class="tv-card__vote">${vote}</span>` : ''; // Если нет voteElem то не выводим span tv-card__vote
+		const backdropIMG = backdrop ? IMG_URL + backdrop : ''; // с помощью тернарного вопроса ? задаем вопрос // в конце добавляем '' пустую строку что бы не добавлялся постер No Poster
+		const voteElem = vote ? `<span class="tv-card__vote">${vote}</span>` : ''; // Если нет voteElem то не выводим span tv-card__vote // там где рейтинг 0 мы убираем логотип с рейтингом
 
 		const card = document.createElement('li');
 		card.idTV = id;
@@ -83,12 +88,15 @@ const renderCard = response => {
 			</a>
 		`;
 
-		loading.remove(); // Закрываем прилоудер
-		tvShowsList.append(card);
+		loading.remove(); // Закрываем (удаляем) прилоудер
+		tvShowsList.append(card); // Загружаются новые карточки с сервера
 	});
 };
+// Конец
 
-searchForm.addEventListener('submit', event => {
+
+// ! Работа с поисковой строкой
+searchForm.addEventListener('submit', event => { // Submit это событие которое происходит при нажатии на кнопку Submit или при нажатии на Enter
 	event.preventDefault();
 	const value = searchFormInput.value.trim();
 	searchFormInput.value = ''; // очистка запроса
@@ -97,14 +105,10 @@ searchForm.addEventListener('submit', event => {
 		new DBService().getSearchResult(value).then(renderCard);
 	}
 })
-
 // Конец
 
 
-// > Меню
-
-
-// Открытие меню по нажатию на Гамбургер
+// ! Открытие меню по нажатию на Гамбургер ---
 hamburger.addEventListener('click', () => { // addEventListener - (вызов функции) отслеживает события: клик, наведение, нажатия клавиши
 	leftMenu.classList.toggle('openMenu'); // classList - обращаемся к методу он работает только с классами и точку ставить не нужно в скобках
 	hamburger.classList.toggle('open'); // toggle - добавляет если есть класс и убирает если его нету // эта строчка меняет значок гамбургера на красный крестик
@@ -112,7 +116,7 @@ hamburger.addEventListener('click', () => { // addEventListener - (вызов ф
 // Конец
 
 
-// Закрытия меню когда мы щелкаем за ее пределами
+// ! Закрытия меню когда мы щелкаем за ее пределами ---
 document.addEventListener('click', event => {
 	const target = event.target; // target назначаем event.target для того что бы не писать ниже event.target (хорошая практика)
 	if (!target.closest('.left-menu')) { // стоит ! знак отрицания что бы поменять true на false. А когда стоит !! это двойное отрицание что бы посмотреть буливое значение элемента
@@ -123,7 +127,7 @@ document.addEventListener('click', event => {
 // Конец
 
 
-// Drop Down Menu делает выпадающие списки по нажатию в левом окне - меню (раскрывает список ul "dropdown-list")
+// ! Drop Down Menu делает выпадающие списки по нажатию в левом окне - меню (раскрывает список ul "dropdown-list") ---
 leftMenu.addEventListener('click', event => { // event без скобок () так как когда 1 элемент то скобки не обязательны
 	event.preventDefault();
 	const target = event.target;
@@ -137,7 +141,7 @@ leftMenu.addEventListener('click', event => { // event без скобок () т
 // Конец
 
 
-// Открытие модального окна
+// ! Открытие модального окна ---
 tvShowsList.addEventListener('click', event => {
 
 	event.preventDefault(); // Эта строчка блокирует скачек страницы к верху после нажатия на карточку так как на карточках стоит #
@@ -147,11 +151,12 @@ tvShowsList.addEventListener('click', event => {
 
 	if (card) {
 
+		// ! Подставляются данные в карточку ---
 		new DBService().getTvShow(card.id)
-		.then(data => {
-			tvCardImg.src = IMG_URL + data.poster_path;
+		.then(data => { // then метод который обрабатывает промисы
+			tvCardImg.src = IMG_URL + data.poster_path; // Подставляем картинки
 			tvCardImg.alt = data.name;
-			modalTitle.textContent = data.name;
+			modalTitle.textContent = data.name; // Подставляем заголовки
 			genresList.textContent = '';
 			for (const item of data.genres) { // fore быстрее чем foreEach лучше использовать fore
 				genresList.innerHTML += `<li>${item.name}</li>`;
@@ -159,7 +164,7 @@ tvShowsList.addEventListener('click', event => {
 			rating.textContent = data.vote_average;
 			description.textContent = data.overview;
 			modalLink.href = data.homepage;
-		}) // then метод который обрабатывает промисы
+		})
 		.then(() => {
 			document.body.style.overflow = 'hidden'; // вызываем overflow: hiden; что бы скрыть скрол с права
 			modal.classList.remove('hide');
@@ -170,7 +175,7 @@ tvShowsList.addEventListener('click', event => {
 // Конец
 
 
-// закрытие модального окна
+// ! Закрытие модального окна ---
 modal.addEventListener('click', event => {
 	const crossClose = event.target.closest('.cross'); // Закрываем по нажатию на красный крестик
 	const modalClose = event.target.classList.contains('modal'); // Закрываем по нажатию на фон (за пределами модального окна)
@@ -183,7 +188,7 @@ modal.addEventListener('click', event => {
 // Конец
 
 
-// Смена карточек (замена местами)
+// ! Смена карточек (замена местами) ---
 const changeImage = event => {
 	const card = event.target.closest('.tv-shows__item');
 
