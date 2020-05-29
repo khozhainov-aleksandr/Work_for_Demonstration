@@ -25,6 +25,7 @@ const dropdown = document.querySelectorAll('.dropdown');
 const tvShowsHead = document.querySelector('.tv-shows__head');
 const posterWrapper = document.querySelector('.poster__wrapper');
 const modalContent = document.querySelector('.modal__content');
+const pagination = document.querySelector('.pagination');
 
 
 // ! Прилоудер на всю страницу ---
@@ -58,8 +59,14 @@ class DBService {
 		return this.getData('card.json'); // Запрос
 	}
 
-	getSearchResult = query => this
-		.getData(`${this.SERVER}/search/tv?api_key=${this.API_KEY}&language=ru-RU&query=${query}`);
+	getSearchResult = query => {
+		this.temp = `${this.SERVER}/search/tv?api_key=${this.API_KEY}&language=ru-RU&query=${query}`;
+		return this.getData(this.temp);
+	}
+
+	getNextPage = page => {
+		return this.getData(this.temp + '&page=' + page);
+	}
 
 	getTvShow = id => this.getData(`${this.SERVER}/tv/${id}?api_key=${this.API_KEY}&language=ru-RU`); // Другой стиль написания
 
@@ -118,6 +125,16 @@ const renderCard = (response, target) => {
 		loading.remove(); // Закрываем (удаляем) прилоудер
 		tvShowsList.append(card); // Загружаются новые карточки с сервера
 	});
+
+	pagination.textContent = '';
+
+	// ! Выводим список страниц в конце страницы
+	if (! target && response.total_pages > 1) {
+		for (let i = 1; i <= response.total_pages; i++) {
+			pagination.innerHTML += `<li><a href="#" class="pages">${i}</a></li>`
+		}
+	}
+
 };
 
 
@@ -268,3 +285,13 @@ const changeImage = event => {
 
 tvShowsList.addEventListener('mouseover', changeImage);
 tvShowsList.addEventListener('mouseout', changeImage);
+
+pagination.addEventListener('click', event => {
+	event.preventDefault();
+	const target = event.target;
+
+	if (target.classList.contains('pages')) {
+		tvShows.append(loading);
+		dbService.getNextPage(target.textContent).then(renderCard);
+	}
+});
