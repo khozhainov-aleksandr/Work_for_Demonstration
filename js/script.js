@@ -41,7 +41,7 @@ class DBService {
 	}
 
 	getData = async (url) => {
-		// tvShows.append(loading);
+		tvShows.append(loading);
 		const res = await fetch(url);
 		if (res.ok) {
 			return res.json();

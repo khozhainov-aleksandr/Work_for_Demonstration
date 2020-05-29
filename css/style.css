@@ -879,7 +879,8 @@ main {
     border-left: 2px solid rgba(0, 0, 0, 0.1);
 }
 
-.preloader-three:after {
+/* Отваливается ноготь с пальца */
+/* .preloader-three:after {
     width: 20%;
     height: 60%;
     content: "";
@@ -889,7 +890,7 @@ main {
     left: 0.5vw;
     border-radius: 60% 10% 10% 30%;
     border-right: 2px solid rgba(0, 0, 0, 0.05);
-}
+} */
 
 .preloader-one {
     position: absolute;
