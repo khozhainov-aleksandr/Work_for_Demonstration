@@ -1,8 +1,6 @@
 // + Комментарии написаны на Русском в учебных целях для личного использования !
 
-const IMG_URL = 'https://image.tmdb.org/t/p/w185_and_h278_bestv2/';
-const SERVER = 'https://api.themoviedb.org/3';
-const API_KEY ='624e6ae26e572199a15bbde6c428ca8c';
+const IMG_URL = 'https://image.tmdb.org/t/p/w185_and_h278_bestv2';
 
 const leftMenu = document.querySelector('.left-menu');
 const hamburger = document.querySelector('.hamburger');
@@ -36,7 +34,14 @@ loading.className = 'loading'; // Добавили класс для прило�
 
 // ! Делаем запрос на сервер ---
 class DBService {
+
+	constructor(){
+		this.SERVER = 'https://api.themoviedb.org/3';
+		this.API_KEY ='624e6ae26e572199a15bbde6c428ca8c';
+	}
+
 	getData = async (url) => {
+		// tvShows.append(loading);
 		const res = await fetch(url);
 		if (res.ok) {
 			return res.json();
@@ -53,25 +58,24 @@ class DBService {
 		return this.getData('card.json'); // Запрос
 	}
 
-	getSearchResult = (query) => {
-		return this.getData(`${SERVER}/search/tv?api_key=${API_KEY}&query=${query}&language=ru-RU`);
-	}
+	getSearchResult = query => this
+		.getData(`${this.SERVER}/search/tv?api_key=${this.API_KEY}&language=ru-RU&query=${query}`);
 
-	getTvShow = id => this.getData(`${SERVER}/tv/${id}?api_key=${API_KEY}&language=ru-RU`); // Другой стиль написания
+	getTvShow = id => this.getData(`${this.SERVER}/tv/${id}?api_key=${this.API_KEY}&language=ru-RU`); // Другой стиль написания
 
-	getTopRated = () => this.getData(`${this.SERVER}/tv/top_rated?api_key=${API_KEY}&language=ru-RU`);
+	getTopRated = () => this.getData(`${this.SERVER}/tv/top_rated?api_key=${this.API_KEY}&language=ru-RU`);
 
-	getPopular = () => this.getData(`${this.SERVER}/tv/popular?api_key=${API_KEY}&language=ru-RU`);
+	getPopular = () => this.getData(`${this.SERVER}/tv/popular?api_key=${this.API_KEY}&language=ru-RU`);
 
-	getToday = () => this.getData(`${this.SERVER}/tv/airing_today?api_key=${API_KEY}&language=ru-RU`);
+	getToday = () => this.getData(`${this.SERVER}/tv/airing_today?api_key=${this.API_KEY}&language=ru-RU`);
 
-	getWeek = () => this.getData(`${this.SERVER}/tv/on_the_air?api_key=${API_KEY}&language=ru-RU`);
+	getWeek = () => this.getData(`${this.SERVER}/tv/on_the_air?api_key=${this.API_KEY}&language=ru-RU`);
 }
 
 const dbService = new DBService();
 
 // ! Рендерятся картинки с сервера ---
-const renderCard = response => {
+const renderCard = (response, target) => {
 	tvShowsList.textContent = '';
 
 	if (!response.total_results) {
@@ -81,8 +85,8 @@ const renderCard = response => {
 		return;
 	}
 
-	tvShowsHead.textContent = 'Результат поиска';
-	tvShowsHead.style.cssText = 'color: black;';
+	tvShowsHead.textContent = target ? target.textContent : 'Результат поиска';
+	tvShowsHead.style.cssText = 'color: green;';
 
 	response.results.forEach(item => {
 		const {
@@ -123,8 +127,7 @@ searchForm.addEventListener('submit', event => { // Submit это событие
 	const value = searchFormInput.value.trim();
 	searchFormInput.value = ''; // очистка запроса
 	if (value) {
-		tvShows.append(loading);
-		new DBService().getSearchResult(value).then(renderCard);
+		dbService.getSearchResult(value).then(renderCard);
 	}
 	searchFormInput.value = '';
 });
@@ -132,7 +135,7 @@ searchForm.addEventListener('submit', event => { // Submit это событие
 
 const closeDropdown = () => {
 	dropdown.forEach(item => {
-		item.classList.remove('active') // закрываем все выпадающие меню при нажатии на пустое пространство за пределами окна
+		item.classList.remove('active'); // закрываем все выпадающие меню при нажатии на пустое пространство за пределами окна
 	})
 }
 
@@ -165,20 +168,24 @@ leftMenu.addEventListener('click', event => { // event без скобок () т
 		hamburger.classList.add('open');
 	}
 
-	if (target.closest('#top-rander')) {
-		dbService.getTopRated().then(renderCard);
+	if (target.closest('#top-rated')) {
+		dbService.getTopRated().then((response) => renderCard(response, target));
 	}
 
 	if (target.closest('#popular')) {
-		dbService.getTopRated().then(renderCard);
+		dbService.getPopular().then((response) => renderCard(response, target));
 	}
 
 	if (target.closest('#week')) {
-		dbService.getTopRated().then(renderCard);
+		dbService.getWeek().then((response) => renderCard(response, target));
 	}
 
 	if (target.closest('#today')) {
-		dbService.getTopRated().then(renderCard);
+		dbService.getToday().then((response) => renderCard(response, target));
+	}
+	if (target.closest('#search')) {
+		tvShowsList.textContent = '';
+		tvShowsHead.textContent = '';
 	}
 });
 
@@ -196,7 +203,7 @@ tvShowsList.addEventListener('click', event => {
 		preloader.style.display = 'block';
 
 		// ! Подставляются данные в карточку ---
-		new DBService().getTvShow(card.id)
+		dbService.getTvShow(card.id)
 		.then(({ // then метод который обрабатывает промисы
 			poster_path: posterPath,
 			name: title,
@@ -229,8 +236,8 @@ tvShowsList.addEventListener('click', event => {
 		})
 		.finally(() => {
 			preloader.style.display = ''; // Закрытие прилоудера для модального окна
-		})
-	};
+		});
+	}
 });
 
 
@@ -240,8 +247,9 @@ modal.addEventListener('click', event => {
 	const modalClose = event.target.classList.contains('modal'); // Закрываем по нажатию на фон (за пределами модального окна)
 
 	if (crossClose || modalClose) {
-		document.body.overflow = '';
+		document.body.style.overflow = '';
 		modal.classList.add('hide'); // Прячет модальное окно
+		loading.remove(); // Убираем прилоудер после закрытия модального окна
 	}
 });
 
