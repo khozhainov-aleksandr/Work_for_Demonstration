@@ -5,11 +5,32 @@
 }
 
 .grid-container {
-  
+  /* Всегда задается перед построением сетки */
+  display: grid;
+
+  /* Создает 3 колонки по 200px */
+  grid-template-columns: 200px 200px 200px;
+
+  /* Создает 3 строки по 70px */
+  grid-template-rows: 70px 70px 70px;
+
+  /* Аналогия 2 свойствам выше (Сначала идут rows а потом через / идет columns) */
+  grid-template: 70px 70px 70px / 200px 200px 200px;
+
+  /* Разделяет все колонки на 10px (вставляет пустое пространство) */
+  column-gap: 10px;
+
+  /* Разделяет все строки на 10px (вставляет пустое пространство) */
+  row-gap: 10px;
+
+  /* Альтернатива двум верхним свойствам (первое задается по X второе по Y)*/
+  gap: 10px 5px;
+
+
 }
 
 .grid-elem {
-  height: 50px;
+  /* height: 50px; */
   background-color: rgba(1, 1, 96, 1);
   color: #fff;
   line-height: 50px;
