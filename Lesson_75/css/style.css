@@ -1,0 +1,32 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.grid-container {
+  width: 700px;
+  height: 700px;
+  display: grid;
+  /* fr - гибкая единица вычисления но для нее надо в блоке указывать высоту и ширину что бы она знала с чего отсчитывать */
+  grid-template-columns: 1fr 1fr 1fr;
+
+  /* тоже самое что выше ( в скобках указываем два значения через запятую в первом, сколько раз будем повторять а во втором, какую величину) */
+  grid-template-columns: repeat(3, 1fr);
+
+  /* можно комбинировать значения (получается первая колонка 50px потом 1fr и так всего 3 раза) если указать значение за скобками то на 4 колонке будет 10px на 5 колонке будет 100px и потом снова по кругу) */
+  grid-template-columns: repeat(3, 50px 1fr) 10px 100px;
+
+  grid-template-rows: 1fr 1fr 1fr;
+}
+
+.grid-elem {
+  /* height: 50px; */
+  background-color: rgba(1, 1, 96, 1);
+  color: #fff;
+  line-height: 50px;
+  text-align: center;
+  font-size: 26px;
+  border: 1px solid #000;
+  border-radius: 4px;
+}
