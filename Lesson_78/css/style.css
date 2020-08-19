@@ -1,0 +1,76 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.grid-container {
+  /* width: 700px; */
+  height: 1000px;
+  display: grid;
+  grid-template-columns: [col_1s] 150px [col_2s] 150px [col_3s] 150px [col_4s];
+  grid-template-rows: repeat(3, minmax(100px, auto));
+  grid-auto-rows: minmax(100px, auto);
+  gap: 5px;
+
+  /* Указывается в (display: grid;) Все блоки (колонки) становятся по центру, так же можно использовать (start, center, end) */
+  /* align-items: center; */
+
+  /* Указывается в (display: grid;) Все Строки (row) становятся по центру, так же можно использовать (start, center, end) */
+  /* justify-items: center; */
+
+  /* Сокращенная форма двух свойств выше, делает то же самое (применяется для контейнера display: grid) */
+  /* place-items: align-items + justify-items; */
+  /* place-items: center center; */
+
+
+
+  /* Аналогично Флексам, размещает блок по центру страницы (по ширине)*/
+  justify-content: center;
+
+  /* Аналогично Флексам, размещает блок по центру (по высоте) обязательно нужно указывать высоту блока height: 1000px; что бы блок разместился по его центру, без высоты не чего не измениться */
+  align-content: center;
+
+  /* Сокращенная форма двух свойств выше, делает то же самое (применяется для контейнера display: grid) */
+  /* place-content: justify-content + align-content; */
+  place-content: center center;
+}
+
+.grid-elem {
+  background-color: rgba(1, 1, 96, 1);
+  color: #fff;
+  line-height: 50px;
+  text-align: center;
+  font-size: 26px;
+  border: 1px solid #000;
+  border-radius: 4px;
+}
+
+#first {
+  /* Смещает Блок (column) в конец так же есть (start, center, end) */
+  /* align-self: end; */
+
+  /* Смещает Строку (row) в центр так же есть (start, center, end) */
+  /* justify-self: center; */
+
+  /* Сокращенная форма двух свойств выше, делает то же самое (Применяется только для одного элемента) */
+  /* place-self: align-self + justify-self; */
+  /* place-self: center center; */
+
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+#second {
+  grid-column: 3 / 4;
+  grid-row: 1 / 3;
+}
+
+#third {
+  grid-column: col_2s / col_3s;
+  grid-row: 2 / 4;
+}
+
+#seven {
+  grid-column: 1 / 4;
+}
