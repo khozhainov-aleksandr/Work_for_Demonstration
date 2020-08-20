@@ -46,3 +46,4 @@ Temporary Items
 /.vscode
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,visualstudiocode
+node_modules
